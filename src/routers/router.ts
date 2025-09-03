@@ -1,8 +1,8 @@
 import { Router } from "express";
-import userHeaderRoute from "./userHeaderRoute";
+import migrationDataRouter from "./migrationDataRouter";
 
 const router = Router();
 
-router.use('/user-header', userHeaderRoute)
+router.use('/migration', migrationDataRouter)
 
 export default router
