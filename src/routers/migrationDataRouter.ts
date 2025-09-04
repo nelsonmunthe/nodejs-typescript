@@ -44,6 +44,14 @@ router.post('/custumer-verification-document', async (req: Request, res: Respons
     }
 })
 
+router.post('/custumer-verification-status', async (req: Request, res: Response, next : NextFunction) => {
+    try {
+        await new MigrationDataController().customerVerificationStatus(req, res, next)
+    } catch (error) {
+        next(error)
+    }
+})
+
 
 
 export default router;

@@ -56,21 +56,21 @@ class MigrationDataUsecase {
                 detail["document_name"]   = data["E"];
                 detail["uploaded_file"]   = data["F"];
                 detail["expired_date"]   = data["G"];
-                detail["status"]   = data["H"];
+                detail["status"]   = "In Review";
                 detail["customer_verified_id"]   = ""
                 detail["file_url"] = "";
                 detail["remarks"]   = "";
-
+                // console.log("detail", cacheData)
                 if(detail["company_name"] in cacheData) {
-                    detail["customer_verified_id"] = cacheData[detail["company_name"]][0].customer_verified_id
-                    cacheData[detail["company_name"]].push(detail)
+                    detail["customer_verified_id"] = cacheData[detail["company_name"]].customer_verified_id
+                    cacheData[detail["company_name"]].data.push(detail)
                 } else {
 
                     const memoHeaders = {
                         'Authorization': `token ${process.env.api_key}:${process.env.api_secret}`
                     }
 
-                    if(data["B"] && (data["B"] !== "" || data["B"] !== "#N/A")) {
+                    if(data["B"] && data["D"] && (data["B"] !== "" || data["B"] !== "#N/A")) {
                         const response =  await axios
                             .post(process.env.MOF_SERVICES + `/api/resource/Customer%20Verification`,
                                 {
@@ -84,8 +84,14 @@ class MigrationDataUsecase {
                         }
                     }
 
-                    cacheData[detail["company_name"]] = [detail];
-                    
+                    const newData = {
+                        data: [detail],
+                        remarks: "",
+                        customer_verified_id: detail["customer_verified_id"] ?? "",
+                        status: "In Review"
+                    }
+
+                    cacheData[detail["company_name"]] = newData
                 }
 
 
@@ -113,8 +119,9 @@ class MigrationDataUsecase {
 
             for(let [key, values] of Object.entries(content)) {
                 const items:any = values;
-                for(let index=0; index < items.length; index++) {
-                    const detail = items[index];
+                const { data }   = items
+                for(let index=0; index < data.length; index++) {
+                    const detail = data[index];
                     
                     if(detail.customer_verified_id !== "" && detail.file_url === "") {
                         let file  = fs.readFileSync(path.join(__dirname, '../../../../../../../' + detail.uploaded_file), 'utf8');
@@ -130,30 +137,44 @@ class MigrationDataUsecase {
                                 'Authorization': `token ${process.env.api_key}:${process.env.api_secret}`
                             }
 
-                            const response =  await axios
-                            .post(process.env.MOF_SERVICES + `/api/method/upload_file`,
-                                form,
-                                {headers: memoHeaders}
-                            )
+                            try {
+                                const response =  await axios
+                                .post(process.env.MOF_SERVICES + `/api/method/upload_file`,
+                                    form,
+                                    {headers: memoHeaders}
+                                )
+    
+                                if(response?.data?.message?.file_url) {
+                                    detail.file_url = response.data.message.file_url
+                                } 
+                            } catch (error:any) {
 
-                            if(response?.data?.message?.file_url) {
-                                detail.file_url = response.data.message.file_url
-                            } 
+                                detail['remarks'] = error.response.data.exception
+                            }
                             
                             if(cacheData[key]) {
-                                cacheData[key].push(detail)
+                                cacheData[key].data.push(detail)
                             } else {
-                                cacheData[key] = [detail]
+                                const newData = {
+                                    ...items,
+                                    data: [detail]
+                                }
+                                cacheData[key] = newData
                             }
                         }
                         
                     } else {
                         if(cacheData[key]) {
-                            cacheData[key].push(detail)
+                            cacheData[key].data.push(detail)
                         } else {
-                            cacheData[key] = [detail]
+                            const newData = {
+                                ...items,
+                                data: [detail]
+                            }
+                            cacheData[key] = newData
                         }
                     }
+                    console.log("cacheData", detail)
                 }
             }
             
@@ -223,6 +244,7 @@ class MigrationDataUsecase {
 
             return response.successResponse('Upload succeeded', 200, null)
         } catch (error:any) {
+
             return response.errorResponse(error.message, 404, null)
         }
     }
@@ -230,36 +252,112 @@ class MigrationDataUsecase {
     async customerVerificationDocument(req: Request){
         const response = new GenericResponseEntity();
         try {
-           
+            let cacheData:any = {};
             let content  = fs.readFileSync(path.join(__dirname, '../../../data/') + process.env.env + "-" + process.env.companyName + '.json', 'utf8');
             content = JSON.parse(content)
             
             for(let [key, values] of Object.entries(content)) {
                 const items:any = values;
                     
-                    if(items[0].customer_verified_id !== "" && items[0].file_url !== "") {
-                        const memoHeaders = {
-                            'Authorization': `token ${process.env.api_key}:${process.env.api_secret}`
+                if(items.customer_verified_id !== "" && items.data[0].file_url !== "") {
+                    const memoHeaders = {
+                        'Authorization': `token ${process.env.api_key}:${process.env.api_secret}`
+                    }
+                    const registration_documents = items.data.map((item:any) => {
+                        return{
+                            "master_registration_document_id": item["OMS Document Name"], //required
+                            "file_document": item.file_url,  //Perlu upload image atau document dulu untuk dapatkan file_url ini
+                            "expired_date": "2025-12-31",
+                            "status": "In Review"
                         }
-                        const registration_documents = items.map((item:any) => {
-                            return{
-                                "master_registration_document_id": item["OMS Document Name"], //required
-                                "file_document": item.file_url,  //Perlu upload image atau document dulu untuk dapatkan file_url ini
-                                "expired_date": "2025-12-31",
-                                "status": "In Review"
-                            }
-                        })
-                        console.log("registration_documents", registration_documents)
+                    })
+
+                    try {
                         const response =  await axios
-                        .put(process.env.MOF_SERVICES + `/api/resource/Customer%20Verification/${items[0].customer_verified_id}`,
+                        .put(process.env.MOF_SERVICES + `/api/resource/Customer%20Verification/${items.customer_verified_id}`,
                             {
                                 registration_documents: registration_documents
                             },
                             {headers: memoHeaders}
                         )
-                                         
-                    } 
+
+                        if(response) {
+                            items.status = "Pending"
+                        }
+
+                    } catch (error:any) {
+                        items.remarks = error.response.data.exception;
+                    }
+                                        
+                } 
+
+                cacheData[key] = items
             }
+
+            fs.writeFile(path.join(__dirname, '../../../data/') + process.env.env + "-" + process.env.companyName + '.json', JSON.stringify(cacheData), (err) => {
+                if (err) {
+                    return response.errorResponse(err.message, 500, null);
+                }
+            });
+
+            return response.successResponse('Upload succeeded', 200, null)
+        } catch (error:any) {
+            
+            return response.errorResponse(error.message, 404, null)
+        }
+    }
+
+    async customerVerificationStatus(req: Request){
+        const response = new GenericResponseEntity();
+        try {
+            let cacheData:any = {};
+            let content  = fs.readFileSync(path.join(__dirname, '../../../data/') + process.env.env + "-" + process.env.companyName + '.json', 'utf8');
+            content = JSON.parse(content)
+            
+            for(let [key, values] of Object.entries(content)) {
+                const items:any = values;
+                    
+                if(items.status === "Pending") {
+                    const memoHeaders = {
+                        'Authorization': `token ${process.env.api_key}:${process.env.api_secret}`
+                    }
+                    const registration_documents = items.data.map((item:any) => {
+                        return{
+                            "master_registration_document_id": item["OMS Document Name"], //required
+                            "file_document": item.file_url,  //Perlu upload image atau document dulu untuk dapatkan file_url ini
+                            "expired_date": "2025-12-31",
+                            "status": "In Review"
+                        }
+                    })
+
+                    try {
+                        const response =  await axios
+                        .put(process.env.MOF_SERVICES + `api/resource/Customer%20Verification/${items.customer_verified_id}`,
+                            {
+                                registration_documents: registration_documents
+                            },
+                            {headers: memoHeaders}
+                        )
+
+                        if(response) {
+                            items.status = "Incomplete"
+                        }
+
+                    } catch (error:any) {
+                        items.remarks = error.response.data.exception;
+                        console.log("error", error.response.data.exception)
+                    }
+                                        
+                } 
+
+                cacheData[key] = items
+            }
+
+            fs.writeFile(path.join(__dirname, '../../../data/') + process.env.env + "-" + process.env.companyName + '.json', JSON.stringify(cacheData), (err) => {
+                if (err) {
+                    return response.errorResponse(err.message, 500, null);
+                }
+            });
 
             return response.successResponse('Upload succeeded', 200, null)
         } catch (error:any) {

@@ -1,67 +1,84 @@
 {
-  "PT BIOGEN SCIENTIFIC": [
-    {
-      "company_name": "PT BIOGEN SCIENTIFIC",
-      "Customer OMS ID": "PT BIOGEN SCIENTIFIC",
-      "Admin_Email": "harti@biogenscientific.co.id",
-      "OMS Document Name": "ktp_pemilik",
-      "document_name": "document_ktp_pemilik_sarana",
-      "uploaded_file": "/legal_documents/company/35697/document_ktp_pemilik_sarana.pdf",
-      "status": "pending",
-      "customer_verified_id": "CUST-VERIF-001216",
-      "file_url": "/files/document_ktp_pemilik_sarana",
-      "remarks": ""
-    },
-    {
-      "company_name": "PT BIOGEN SCIENTIFIC",
-      "Customer OMS ID": "PT BIOGEN SCIENTIFIC",
-      "Admin_Email": "harti@biogenscientific.co.id",
-      "OMS Document Name": "npwp_file",
-      "document_name": "document_npwp",
-      "uploaded_file": "/legal_documents/company/35697/document_npwp.pdf",
-      "status": "pending",
-      "customer_verified_id": "CUST-VERIF-001216",
-      "file_url": "/files/document_npwp2a29bd",
-      "remarks": ""
-    },
-    {
-      "company_name": "PT BIOGEN SCIENTIFIC",
-      "Customer OMS ID": "PT BIOGEN SCIENTIFIC",
-      "Admin_Email": "harti@biogenscientific.co.id",
-      "OMS Document Name": "sertifikat_cdob",
-      "document_name": "document_sertifikasi_cdob",
-      "uploaded_file": "/legal_documents/company/35697/document_sertifikasi_cdob.pdf",
-      "expired_date": 46775,
-      "status": "pending",
-      "customer_verified_id": "CUST-VERIF-001216",
-      "file_url": "/files/document_sertifikasi_cdob.pdf",
-      "remarks": ""
-    },
-    {
-      "company_name": "PT BIOGEN SCIENTIFIC",
-      "Customer OMS ID": "PT BIOGEN SCIENTIFIC",
-      "Admin_Email": "harti@biogenscientific.co.id",
-      "OMS Document Name": "sipa",
-      "document_name": "document_sipa_sika_apoteker",
-      "uploaded_file": "/legal_documents/company/35697/document_sipa_sika_apoteker.pdf",
-      "expired_date": 46231,
-      "status": "pending",
-      "customer_verified_id": "CUST-VERIF-001216",
-      "file_url": "/files/document_sipa_sika_apoteker.pdf",
-      "remarks": ""
-    },
-    {
-      "company_name": "PT BIOGEN SCIENTIFIC",
-      "Customer OMS ID": "PT BIOGEN SCIENTIFIC",
-      "Admin_Email": "harti@biogenscientific.co.id",
-      "OMS Document Name": "surat_izin_operasional",
-      "document_name": "document_surat_izin_pbf",
-      "uploaded_file": "/legal_documents/company/35697/document_surat_izin_pbf.pdf",
-      "expired_date": 46737,
-      "status": "pending",
-      "customer_verified_id": "CUST-VERIF-001216",
-      "file_url": "/files/document_surat_izin_pbf.pdf",
-      "remarks": ""
+    "PT. Forta Mitra Sejati": {
+        "data": [
+            {
+                "company_name": "PT. Forta Mitra Sejati",
+                "Customer OMS ID": "PT. Forta Mitra Sejati",
+                "Admin_Email": "apjforta@gmail.com",
+                "OMS Document Name": "sertifikat_cdob",
+                "document_name": "document_sertifikasi_cdob",
+                "uploaded_file": "/legal_documents/company/2972/document_sertifikasi_cdob.PDF",
+                "expired_date": 45842,
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002532",
+                "file_url": "/files/document_sertifikasi_cdob.PDF",
+                "remarks": ""
+            },
+            {
+                "company_name": "PT. Forta Mitra Sejati",
+                "Customer OMS ID": "PT. Forta Mitra Sejati",
+                "Admin_Email": "apjforta@gmail.com",
+                "OMS Document Name": "surat_izin_operasional",
+                "document_name": "document_surat_izin_pbf",
+                "uploaded_file": "/legal_documents/company/2972/document_surat_izin_pbf.pdf",
+                "expired_date": 45631,
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002532",
+                "file_url": "/files/document_surat_izin_pbf7f10aa.pdf",
+                "remarks": ""
+            },
+            {
+                "company_name": "PT. Forta Mitra Sejati",
+                "Customer OMS ID": "PT. Forta Mitra Sejati",
+                "Admin_Email": "apjforta@gmail.com",
+                "OMS Document Name": "stra",
+                "document_name": "document_stra_apoteker",
+                "uploaded_file": "/legal_documents/company/2972/document_stra_apoteker.pdf",
+                "expired_date": 45376,
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002532",
+                "file_url": "/files/document_stra_apoteker.pdf",
+                "remarks": ""
+            },
+            {
+                "company_name": "PT. Forta Mitra Sejati",
+                "Customer OMS ID": "PT. Forta Mitra Sejati",
+                "Admin_Email": "apjforta@gmail.com",
+                "OMS Document Name": "sipa",
+                "document_name": "document_sipa_sika_apoteker",
+                "uploaded_file": "/legal_documents/company/2972/document_sipa_sika_apoteker.pdf",
+                "expired_date": 45376,
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002532",
+                "file_url": "/files/document_sipa_sika_apotekerb24e74.pdf",
+                "remarks": ""
+            },
+            {
+                "company_name": "PT. Forta Mitra Sejati",
+                "Customer OMS ID": "PT. Forta Mitra Sejati",
+                "Admin_Email": "apjforta@gmail.com",
+                "OMS Document Name": "npwp_file",
+                "document_name": "document_npwp",
+                "uploaded_file": "/legal_documents/company/2972/document_npwp.pdf",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002532",
+                "file_url": "/files/document_npwp.pdf",
+                "remarks": ""
+            },
+            {
+                "company_name": "PT. Forta Mitra Sejati",
+                "Admin_Email": "apjforta@gmail.com",
+                "OMS Document Name": "npwp_file",
+                "document_name": "document_nama_apoteker_penanggung_jawab",
+                "uploaded_file": "/legal_documents/company/2972/document_nama_apoteker_penanggung_jawab.pdf",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002532",
+                "file_url": "/files/document_nama_apoteker_penanggung_jawab.pdf",
+                "remarks": ""
+            }
+        ],
+        "remarks": "TypeError: 'NoneType' object is not callable",
+        "customer_verified_id": "CUST-VERIF-002532",
+        "status": "Incomplete"
     }
-  ]
 }

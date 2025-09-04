@@ -20,6 +20,10 @@ class MigrationDataController{
     async customerVerificationDocument(req: Request, res: Response, next: NextFunction){
         httpResponse(await this.migrationDataUsecase.customerVerificationDocument(req), res )
     }
+
+    async customerVerificationStatus(req: Request, res: Response, next: NextFunction){
+        httpResponse(await this.migrationDataUsecase.customerVerificationStatus(req), res )
+    }
 }
 
 export default MigrationDataController;
