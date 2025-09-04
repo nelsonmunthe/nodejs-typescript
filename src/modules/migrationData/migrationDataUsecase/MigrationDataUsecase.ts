@@ -124,11 +124,11 @@ class MigrationDataUsecase {
                     const detail = data[index];
                     
                     if(detail.customer_verified_id !== "" && detail.file_url === "") {
-                        let file  = fs.readFileSync(path.join(__dirname, '../../../../../../../' + detail.uploaded_file), 'utf8');
-                        if(file) {
+                        let buffer = fs.createReadStream(path.join(__dirname, '../../../../../../../' + detail.uploaded_file))
+                        if(buffer) {
                             const form = new FormData();
                             const filename = detail.uploaded_file.split('/').pop();
-                            form.append('file', file, {
+                            form.append('file', buffer, {
                                 filename: filename,
                                 contentType: 'image/jpeg' // Optional, but recommended for proper MIME type handling
                             });
@@ -282,10 +282,11 @@ class MigrationDataUsecase {
                         )
 
                         if(response) {
-                            items.status = "Pending"
+                            items.status = "In Review"
                         }
 
                     } catch (error:any) {
+
                         items.remarks = error.response.data.exception;
                     }
                                         
@@ -300,7 +301,7 @@ class MigrationDataUsecase {
                 }
             });
 
-            return response.successResponse('Upload succeeded', 200, null)
+            return response.successResponse('Verification document succeeded', 200, null)
         } catch (error:any) {
             
             return response.errorResponse(error.message, 404, null)
@@ -317,7 +318,7 @@ class MigrationDataUsecase {
             for(let [key, values] of Object.entries(content)) {
                 const items:any = values;
                     
-                if(items.status === "Pending") {
+                if(items.status === "In Review") {
                     const memoHeaders = {
                         'Authorization': `token ${process.env.api_key}:${process.env.api_secret}`
                     }
@@ -332,7 +333,7 @@ class MigrationDataUsecase {
 
                     try {
                         const response =  await axios
-                        .put(process.env.MOF_SERVICES + `api/resource/Customer%20Verification/${items.customer_verified_id}`,
+                        .put(process.env.MOF_SERVICES + `/api/resource/Customer%20Verification/${items.customer_verified_id}`,
                             {
                                 registration_documents: registration_documents
                             },
@@ -359,7 +360,7 @@ class MigrationDataUsecase {
                 }
             });
 
-            return response.successResponse('Upload succeeded', 200, null)
+            return response.successResponse('Verification status succeeded', 200, null)
         } catch (error:any) {
             return response.errorResponse(error.message, 404, null)
         }
