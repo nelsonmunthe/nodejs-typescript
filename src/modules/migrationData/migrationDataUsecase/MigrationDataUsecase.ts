@@ -29,6 +29,31 @@ class MigrationDataUsecase {
         return fs.readFileSync(path.join(__dirname, relPath), { encoding: 'utf8' })
     }
 
+    excelDateToJSDate(serial: number) {
+        const utcDays = Math.floor(serial - 25569); // Excel epoch is 1900-01-01
+        const utcValue = utcDays * 86400; // seconds
+        const dateInfo = new Date(utcValue * 1000);
+      
+        // Handle fractional part (time of day)
+        const fractionalDay = serial - Math.floor(serial) + 0.0000001;
+        let totalSeconds = Math.floor(86400 * fractionalDay);
+      
+        const seconds = totalSeconds % 60;
+        totalSeconds -= seconds;
+      
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor(totalSeconds / 60) % 60;
+      
+        return new Date(
+          dateInfo.getFullYear(),
+          dateInfo.getMonth(),
+          dateInfo.getDate(),
+          hours,
+          minutes,
+          seconds
+        );
+      }
+
     async customerVerification(req: Request){
         const response = new GenericResponseEntity();
         try {
@@ -55,11 +80,12 @@ class MigrationDataUsecase {
                 detail["OMS Document Name"]   = data["D"];
                 detail["document_name"]   = data["E"];
                 detail["uploaded_file"]   = data["F"];
-                detail["expired_date"]   = data["G"];
+                detail["expired_date"]   = data["G"] ? this.excelDateToJSDate(data['G']) : "";
                 detail["status"]   = "In Review";
                 detail["customer_verified_id"]   = ""
                 detail["file_url"] = "";
                 detail["remarks"]   = "";
+
                 // console.log("detail", cacheData)
                 if(detail["company_name"] in cacheData) {
                     detail["customer_verified_id"] = cacheData[detail["company_name"]].customer_verified_id
@@ -71,17 +97,23 @@ class MigrationDataUsecase {
                     }
 
                     if(data["B"] && data["D"] && (data["B"] !== "" || data["B"] !== "#N/A")) {
+                      try {
                         const response =  await axios
-                            .post(process.env.MOF_SERVICES + `/api/resource/Customer%20Verification`,
-                                {
-                                    "customer_id": data["B"],
-                                    "purpose": "New Customer"
-                                },
-                                {headers: memoHeaders}
-                            )
+                        .post(process.env.MOF_SERVICES + `/api/resource/Customer%20Verification`,
+                            {
+                                "customer_id": data["B"],
+                                "purpose": "New Customer"
+                            },
+                            {headers: memoHeaders}
+                        )
                         if(response.data?.data?.name) {
                             detail["customer_verified_id"] = response.data?.data?.name
                         }
+                        
+                      } catch (error:any) {
+                            console.log(error.response.data)
+                      }
+
                     }
 
                     const newData = {
@@ -106,12 +138,14 @@ class MigrationDataUsecase {
             return response.successResponse('Upload succeeded', 200, cacheData)
 
         } catch (error:any) {
+
             return response.errorResponse(error.message, 404, null)
         }
     }
 
     async uploadDocument(req: Request) {
         const response = new GenericResponseEntity();
+      
         try {
             let cacheData:any = {};
             let content  = fs.readFileSync(path.join(__dirname, '../../../data/') + process.env.env + "-" + process.env.companyName + '.json', 'utf8');
@@ -124,13 +158,14 @@ class MigrationDataUsecase {
                     const detail = data[index];
                     
                     if(detail.customer_verified_id !== "" && detail.file_url === "") {
+                        // pointing to folder documents
                         let buffer = fs.createReadStream(path.join(__dirname, '../../../../../../../' + detail.uploaded_file))
                         if(buffer) {
                             const form = new FormData();
                             const filename = detail.uploaded_file.split('/').pop();
                             form.append('file', buffer, {
                                 filename: filename,
-                                contentType: 'image/jpeg' // Optional, but recommended for proper MIME type handling
+                                // contentType: 'image/jpeg' // Optional, but recommended for proper MIME type handling
                             });
 
                             const memoHeaders = {
@@ -178,64 +213,6 @@ class MigrationDataUsecase {
                 }
             }
             
-            // console.log("content", content)
-            // fs.readFile(path.join(__dirname, '../../../data/') + process.env.env + "-" + process.env.companyName + '.json', {encoding: 'utf-8'}, function(err, response){
-            //     if (!err) {
-            //         const data = JSON.parse(response);
-                   
-            //         for(let [key, values] of Object.entries(data)) {
-            //             const items:any = values;
-            //             for(let index=0; index < items.length; index++) {
-            //                 const detail = items[index];
-                            
-            //                 if(detail.customer_verified_id !== "" && detail.file_url === "") {
-            //                     fs.readFile(path.join(__dirname, '../../../../../../../' + detail.uploaded_file), 'utf8', async (err, data) => {
-            //                         if (err) {
-            //                             console.error('Error reading file:', err);
-            //                             return;
-            //                         }
-            //                         const form = new FormData();
-            //                         const filename = detail.uploaded_file.split('/').pop();
-            //                         form.append('file', data, {
-            //                             filename: filename,
-            //                             contentType: 'image/jpeg' // Optional, but recommended for proper MIME type handling
-            //                         });
-                                    
-            //                         const memoHeaders = {
-            //                             'Authorization': `token ${process.env.api_key}:${process.env.api_secret}`
-            //                         }
-
-            //                         const response =  await axios
-            //                         .post(process.env.MOF_SERVICES + `/api/method/upload_file`,
-            //                             form,
-            //                             {headers: memoHeaders}
-            //                         )
-
-            //                         if(response?.data?.message?.file_url) {
-            //                             detail.file_url = response.data.message.file_url
-            //                         } 
-                                    
-            //                         if(cacheData[key]) {
-            //                             cacheData[key].push(detail)
-            //                         } else {
-            //                             cacheData[key] = [detail]
-            //                         }
-            //                         // console.log("cacheData", cacheData)
-            //                     });
-                                
-            //                 } else {
-            //                     if(cacheData[key]) {
-            //                         cacheData[key].push(detail)
-            //                     } else {
-            //                         cacheData[key] = [detail]
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     }
-
-            //     console.log('output',cacheData)
-            // });
             fs.writeFile(path.join(__dirname, '../../../data/') + process.env.env + "-" + process.env.companyName + '.json', JSON.stringify(cacheData), (err) => {
                 if (err) {
                     return response.errorResponse(err.message, 500, null);
@@ -263,14 +240,21 @@ class MigrationDataUsecase {
                     const memoHeaders = {
                         'Authorization': `token ${process.env.api_key}:${process.env.api_secret}`
                     }
-                    const registration_documents = items.data.map((item:any) => {
-                        return{
-                            "master_registration_document_id": item["OMS Document Name"], //required
-                            "file_document": item.file_url,  //Perlu upload image atau document dulu untuk dapatkan file_url ini
-                            "expired_date": "2025-12-31",
-                            "status": "In Review"
+
+                    const registration_documents:any = [];
+
+                    for(let item of items.data) {
+                        if(item["OMS Document Name"]) {
+                            registration_documents.push(
+                                {
+                                    "master_registration_document_id": item["OMS Document Name"], //required
+                                    "file_document": item.file_url,  //Perlu upload image atau document dulu untuk dapatkan file_url ini
+                                    "expired_date": "2025-12-31",
+                                    "status": "In Review"
+                                }
+                            )
                         }
-                    })
+                    }
 
                     try {
                         const response =  await axios

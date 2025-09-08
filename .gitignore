@@ -3,3 +3,6 @@
 .env_prod
 .env_dev
 .env*
+
+
+../src/data

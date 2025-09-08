@@ -8,9 +8,8 @@
                 "OMS Document Name": "npwp_file",
                 "document_name": "document_npwp",
                 "uploaded_file": "/legal_documents/company/1520/document_npwp.jpeg",
-                "expired_date": "2023-08-25T16:00:00.000Z",
                 "status": "In Review",
-                "customer_verified_id": "CUST-VERIF-002224",
+                "customer_verified_id": "CUST-VERIF-002222",
                 "file_url": "/files/document_npwp010a2b.jpeg",
                 "remarks": ""
             },
@@ -21,9 +20,9 @@
                 "OMS Document Name": "sipa",
                 "document_name": "document_sipa_sika_apoteker",
                 "uploaded_file": "/legal_documents/company/1520/document_sipa_sika_apoteker.jpeg",
-                "expired_date": "2023-08-25T16:00:00.000Z",
+                "expired_date": 45164,
                 "status": "In Review",
-                "customer_verified_id": "CUST-VERIF-002224",
+                "customer_verified_id": "CUST-VERIF-002222",
                 "file_url": "/files/document_sipa_sika_apoteker.jpeg",
                 "remarks": ""
             },
@@ -34,9 +33,9 @@
                 "OMS Document Name": "siup_nib",
                 "document_name": "document_siup",
                 "uploaded_file": "/legal_documents/company/1520/document_siup.jpeg",
-                "expired_date": "2023-08-25T16:00:00.000Z",
+                "expired_date": 45164,
                 "status": "In Review",
-                "customer_verified_id": "CUST-VERIF-002224",
+                "customer_verified_id": "CUST-VERIF-002222",
                 "file_url": "/files/document_siup.jpeg",
                 "remarks": ""
             },
@@ -47,9 +46,9 @@
                 "OMS Document Name": "stra",
                 "document_name": "document_stra_apoteker",
                 "uploaded_file": "/legal_documents/company/1520/document_stra_apoteker.jpeg",
-                "expired_date": "2023-08-25T16:00:00.000Z",
+                "expired_date": 45164,
                 "status": "In Review",
-                "customer_verified_id": "CUST-VERIF-002224",
+                "customer_verified_id": "CUST-VERIF-002222",
                 "file_url": "/files/document_sipa_sika_apoteker.jpeg",
                 "remarks": ""
             },
@@ -60,15 +59,15 @@
                 "OMS Document Name": "surat_izin_operasional",
                 "document_name": "document_surat_izin_apotek",
                 "uploaded_file": "/legal_documents/company/1520/document_surat_izin_apotek.jpeg",
-                "expired_date": "2023-08-25T16:00:00.000Z",
+                "expired_date": 45164,
                 "status": "In Review",
-                "customer_verified_id": "CUST-VERIF-002224",
+                "customer_verified_id": "CUST-VERIF-002222",
                 "file_url": "/files/document_siup.jpeg",
                 "remarks": ""
             }
         ],
         "remarks": "",
-        "customer_verified_id": "CUST-VERIF-002224",
+        "customer_verified_id": "CUST-VERIF-002222",
         "status": "Incomplete"
     }
 }
