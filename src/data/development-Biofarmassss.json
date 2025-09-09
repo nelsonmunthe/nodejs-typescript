@@ -1,0 +1,133 @@
+{
+    "PT SUKSES KELUARGA SENTOSA ": {
+        "data": [
+            {
+                "company_name": "PT SUKSES KELUARGA SENTOSA ",
+                "Customer OMS ID": "PT SUKSES KELUARGA SENTOSA  -",
+                "Admin_Email": "raphaelklinik@gmail.com",
+                "OMS Document Name": "ktp_pemilik",
+                "document_name": "document_ktp_pemilik_sarana",
+                "uploaded_file": "/legal_documents/company/5486/document_ktp_pemilik_sarana.jpeg",
+                "expired_date": "2025-05-15T16:00:00.000Z",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002231",
+                "file_url": "/files/document_ktp_pemilik_sarana.jpeg",
+                "remarks": ""
+            },
+            {
+                "company_name": "PT SUKSES KELUARGA SENTOSA ",
+                "Customer OMS ID": "PT SUKSES KELUARGA SENTOSA  -",
+                "Admin_Email": "raphaelklinik@gmail.com",
+                "OMS Document Name": "npwp_file",
+                "document_name": "document_npwp",
+                "uploaded_file": "/legal_documents/company/5486/document_npwp.jpeg",
+                "expired_date": "2025-05-15T16:00:00.000Z",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002231",
+                "file_url": "/files/document_npwpc379d6.jpeg",
+                "remarks": ""
+            },
+            {
+                "company_name": "PT SUKSES KELUARGA SENTOSA ",
+                "Customer OMS ID": "PT SUKSES KELUARGA SENTOSA  -",
+                "Admin_Email": "raphaelklinik@gmail.com",
+                "OMS Document Name": "sipa",
+                "document_name": "document_sipa_sika_apoteker",
+                "uploaded_file": "/legal_documents/company/5486/document_sipa_sika_apoteker.jpeg",
+                "expired_date": "2025-05-15T16:00:00.000Z",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002231",
+                "file_url": "/files/document_sipa_sika_apotekerfc506d.jpeg",
+                "remarks": ""
+            },
+            {
+                "company_name": "PT SUKSES KELUARGA SENTOSA ",
+                "Customer OMS ID": "PT SUKSES KELUARGA SENTOSA  -",
+                "Admin_Email": "raphaelklinik@gmail.com",
+                "OMS Document Name": "surat_izin_operasional",
+                "document_name": "document_surat_izin_operasional_rumat_sakit_klinik",
+                "uploaded_file": "/legal_documents/company/5486/document_surat_izin_operasional_rumat_sakit_klinik.pdf",
+                "expired_date": "2028-06-23T16:00:00.000Z",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002231",
+                "file_url": "/files/document_surat_izin_operasional_rumat_sakit_klinik.pdf",
+                "remarks": ""
+            }
+        ],
+        "remarks": "pymysql.err.OperationalError: (1292, \"Incorrect date value: '2025-05-15T16:00:00.000Z' for column `_445bb5339a6d2bb3`.`tabCustomer Registration Document`.`expired_date` at row 1\")",
+        "customer_verified_id": "CUST-VERIF-002231",
+        "status": "Incomplete"
+    },
+    "APOTEK SERAVI": {
+        "data": [
+            {
+                "company_name": "APOTEK SERAVI",
+                "Customer OMS ID": "APOTEK SERAVI -",
+                "Admin_Email": "Rantisarnita@yahoo.com",
+                "OMS Document Name": "npwp_file",
+                "document_name": "document_npwp",
+                "uploaded_file": "/legal_documents/company/1520/document_npwp.jpeg",
+                "expired_date": "2023-08-25",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002232",
+                "file_url": "/files/document_npwp010a2b.jpeg",
+                "remarks": ""
+            },
+            {
+                "company_name": "APOTEK SERAVI",
+                "Customer OMS ID": "APOTEK SERAVI -",
+                "Admin_Email": "Rantisarnita@yahoo.com",
+                "OMS Document Name": "sipa",
+                "document_name": "document_sipa_sika_apoteker",
+                "uploaded_file": "/legal_documents/company/1520/document_sipa_sika_apoteker.jpeg",
+                "expired_date": "2023-08-25",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002232",
+                "file_url": "/files/document_sipa_sika_apoteker.jpeg",
+                "remarks": ""
+            },
+            {
+                "company_name": "APOTEK SERAVI",
+                "Customer OMS ID": "APOTEK SERAVI -",
+                "Admin_Email": "Rantisarnita@yahoo.com",
+                "OMS Document Name": "siup_nib",
+                "document_name": "document_siup",
+                "uploaded_file": "/legal_documents/company/1520/document_siup.jpeg",
+                "expired_date": "2023-08-25",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002232",
+                "file_url": "/files/document_siup.jpeg",
+                "remarks": ""
+            },
+            {
+                "company_name": "APOTEK SERAVI",
+                "Customer OMS ID": "APOTEK SERAVI -",
+                "Admin_Email": "Rantisarnita@yahoo.com",
+                "OMS Document Name": "stra",
+                "document_name": "document_stra_apoteker",
+                "uploaded_file": "/legal_documents/company/1520/document_stra_apoteker.jpeg",
+                "expired_date": "2023-08-25",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002232",
+                "file_url": "/files/document_sipa_sika_apoteker.jpeg",
+                "remarks": ""
+            },
+            {
+                "company_name": "APOTEK SERAVI",
+                "Customer OMS ID": "APOTEK SERAVI -",
+                "Admin_Email": "Rantisarnita@yahoo.com",
+                "OMS Document Name": "surat_izin_operasional",
+                "document_name": "document_surat_izin_apotek",
+                "uploaded_file": "/legal_documents/company/1520/document_surat_izin_apotek.jpeg",
+                "expired_date": "2023-08-25",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002232",
+                "file_url": "/files/document_siup.jpeg",
+                "remarks": ""
+            }
+        ],
+        "remarks": "",
+        "customer_verified_id": "CUST-VERIF-002232",
+        "status": "Incomplete"
+    }
+}

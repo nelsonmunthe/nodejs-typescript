@@ -1,0 +1,74 @@
+{
+    "APOTEK SERAVI": {
+        "data": [
+            {
+                "company_name": "APOTEK SERAVI",
+                "Customer OMS ID": "APOTEK SERAVI -",
+                "Admin_Email": "Rantisarnita@yahoo.com",
+                "OMS Document Name": "npwp_file",
+                "document_name": "document_npwp",
+                "uploaded_file": "/legal_documents/company/1520/document_npwp.jpeg",
+                "expired_date": "2023-08-25T16:00:00.000Z",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002227",
+                "file_url": "/files/document_npwp010a2b.jpeg",
+                "remarks": ""
+            },
+            {
+                "company_name": "APOTEK SERAVI",
+                "Customer OMS ID": "APOTEK SERAVI -",
+                "Admin_Email": "Rantisarnita@yahoo.com",
+                "OMS Document Name": "sipa",
+                "document_name": "document_sipa_sika_apoteker",
+                "uploaded_file": "/legal_documents/company/1520/document_sipa_sika_apoteker.jpeg",
+                "expired_date": "2023-08-25T16:00:00.000Z",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002227",
+                "file_url": "/files/document_sipa_sika_apoteker.jpeg",
+                "remarks": ""
+            },
+            {
+                "company_name": "APOTEK SERAVI",
+                "Customer OMS ID": "APOTEK SERAVI -",
+                "Admin_Email": "Rantisarnita@yahoo.com",
+                "OMS Document Name": "siup_nib",
+                "document_name": "document_siup",
+                "uploaded_file": "/legal_documents/company/1520/document_siup.jpeg",
+                "expired_date": "2023-08-25T16:00:00.000Z",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002227",
+                "file_url": "/files/document_siup.jpeg",
+                "remarks": ""
+            },
+            {
+                "company_name": "APOTEK SERAVI",
+                "Customer OMS ID": "APOTEK SERAVI -",
+                "Admin_Email": "Rantisarnita@yahoo.com",
+                "OMS Document Name": "stra",
+                "document_name": "document_stra_apoteker",
+                "uploaded_file": "/legal_documents/company/1520/document_stra_apoteker.jpeg",
+                "expired_date": "2023-08-25T16:00:00.000Z",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002227",
+                "file_url": "/files/document_sipa_sika_apoteker.jpeg",
+                "remarks": ""
+            },
+            {
+                "company_name": "APOTEK SERAVI",
+                "Customer OMS ID": "APOTEK SERAVI -",
+                "Admin_Email": "Rantisarnita@yahoo.com",
+                "OMS Document Name": "surat_izin_operasional",
+                "document_name": "document_surat_izin_apotek",
+                "uploaded_file": "/legal_documents/company/1520/document_surat_izin_apotek.jpeg",
+                "expired_date": "2023-08-25T16:00:00.000Z",
+                "status": "In Review",
+                "customer_verified_id": "CUST-VERIF-002227",
+                "file_url": "/files/document_siup.jpeg",
+                "remarks": ""
+            }
+        ],
+        "remarks": "",
+        "customer_verified_id": "CUST-VERIF-002227",
+        "status": "In Review"
+    }
+}

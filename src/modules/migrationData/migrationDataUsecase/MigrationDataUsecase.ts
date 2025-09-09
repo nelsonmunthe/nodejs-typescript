@@ -5,6 +5,7 @@ import * as xlsx from 'xlsx';
 import path from "path";
 import axios from "axios";
 import FormData from "form-data";
+import moment from "moment"
 
 class MigrationDataUsecase {
     constructor(){
@@ -80,7 +81,7 @@ class MigrationDataUsecase {
                 detail["OMS Document Name"]   = data["D"];
                 detail["document_name"]   = data["E"];
                 detail["uploaded_file"]   = data["F"];
-                detail["expired_date"]   = data["G"] ? this.excelDateToJSDate(data['G']) : "";
+                detail["expired_date"]   = data["G"] ? moment(this.excelDateToJSDate(data['G'])).format("DD-MM-YY") : "";
                 detail["status"]   = "In Review";
                 detail["customer_verified_id"]   = ""
                 detail["file_url"] = "";
@@ -178,12 +179,11 @@ class MigrationDataUsecase {
                                     form,
                                     {headers: memoHeaders}
                                 )
-    
-                                if(response?.data?.message?.file_url) {
+                            
+                                if(response) {
                                     detail.file_url = response.data.message.file_url
                                 } 
                             } catch (error:any) {
-
                                 detail['remarks'] = error.response.data.exception
                             }
                             
@@ -209,7 +209,6 @@ class MigrationDataUsecase {
                             cacheData[key] = newData
                         }
                     }
-                    console.log("cacheData", detail)
                 }
             }
             
@@ -249,7 +248,7 @@ class MigrationDataUsecase {
                                 {
                                     "master_registration_document_id": item["OMS Document Name"], //required
                                     "file_document": item.file_url,  //Perlu upload image atau document dulu untuk dapatkan file_url ini
-                                    "expired_date": "2025-12-31",
+                                    "expired_date": item.expired_date,
                                     "status": "In Review"
                                 }
                             )
@@ -329,8 +328,8 @@ class MigrationDataUsecase {
                         }
 
                     } catch (error:any) {
-                        items.remarks = error.response.data.exception;
-                        console.log("error", error.response.data.exception)
+                        items.remarks = error?.response?.data?.exception ?? "something went wrong";
+                        console.log("error", error?.response?.data?.exception)
                     }
                                         
                 } 
