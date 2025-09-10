@@ -53,7 +53,7 @@ class MigrationDataUsecase {
           minutes,
           seconds
         );
-      }
+    }
 
     async customerVerification(req: Request){
         const response = new GenericResponseEntity();
@@ -81,7 +81,7 @@ class MigrationDataUsecase {
                 detail["OMS Document Name"]   = data["D"];
                 detail["document_name"]   = data["E"];
                 detail["uploaded_file"]   = data["F"];
-                detail["expired_date"]   = data["G"] ? moment(this.excelDateToJSDate(data['G'])).format("DD-MM-YY") : "";
+                detail["expired_date"]   = data["G"] ? moment(this.excelDateToJSDate(data['G'])).format("YYYY-MM-DD") : "";
                 detail["status"]   = "In Review";
                 detail["customer_verified_id"]   = ""
                 detail["file_url"] = "";
@@ -309,7 +309,7 @@ class MigrationDataUsecase {
                         return{
                             "master_registration_document_id": item["OMS Document Name"], //required
                             "file_document": item.file_url,  //Perlu upload image atau document dulu untuk dapatkan file_url ini
-                            "expired_date": "2025-12-31",
+                            "expired_date": item.expired_date,
                             "status": "In Review"
                         }
                     })
