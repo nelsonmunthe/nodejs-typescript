@@ -68,6 +68,7 @@ class MigrationDataUsecase {
 
             if(fs.existsSync(path.join(__dirname, '../../../data/') + process.env.env + "-" + process.env.companyName + '.json')){
                 cacheData = this.bufferFile('../../../data/' + process.env.env + "-" + process.env.companyName + '.json')
+                cacheData = JSON.parse(cacheData)
             }
             
             for(let item of data) {
@@ -87,10 +88,12 @@ class MigrationDataUsecase {
                 detail["file_url"] = "";
                 detail["remarks"]   = "";
 
-                // console.log("detail", cacheData)
                 if(detail["company_name"] in cacheData) {
-                    detail["customer_verified_id"] = cacheData[detail["company_name"]].customer_verified_id
-                    cacheData[detail["company_name"]].data.push(detail)
+                    detail["customer_verified_id"] = cacheData[detail["company_name"]].customer_verified_id;
+                    const isExist = cacheData[detail["company_name"]].data.find((item:any) => item["OMS Document Name"] === detail["OMS Document Name"])
+                    if(!isExist) {
+                        cacheData[detail["company_name"]].data.push(detail)
+                    }
                 } else {
 
                     const memoHeaders = {
@@ -126,8 +129,6 @@ class MigrationDataUsecase {
 
                     cacheData[detail["company_name"]] = newData
                 }
-
-
             }
             
             fs.writeFile(path.join(__dirname, '../../../data/') + process.env.env + "-" + process.env.companyName + '.json', JSON.stringify(cacheData), (err) => {
@@ -139,7 +140,6 @@ class MigrationDataUsecase {
             return response.successResponse('Upload succeeded', 200, cacheData)
 
         } catch (error:any) {
-
             return response.errorResponse(error.message, 404, null)
         }
     }
@@ -286,7 +286,7 @@ class MigrationDataUsecase {
 
             return response.successResponse('Verification document succeeded', 200, null)
         } catch (error:any) {
-            
+            console.log("error", error)
             return response.errorResponse(error.message, 404, null)
         }
     }
