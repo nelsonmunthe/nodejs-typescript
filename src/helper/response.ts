@@ -13,7 +13,7 @@ export const httpResponse = (entity: GenericResponseEntity, res: Response) => {
             responseTime: response.responseTime,
         });
 
-        return;
+        return; 
     }
 
     res.status(500);
