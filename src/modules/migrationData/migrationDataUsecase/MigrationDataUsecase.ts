@@ -70,11 +70,11 @@ class MigrationDataUsecase {
                 cacheData = this.bufferFile('../../../data/' + process.env.env + "-" + process.env.companyName + '.json')
                 cacheData = JSON.parse(cacheData)
             }
-            
+            console.log("cachedata", cacheData)
             for(let item of data) {
                 let data:any = item;
                 if(data["A"] === "company_name") continue;
-
+                console.log("Item", item)
                 let detail:any = {}
                 detail["company_name"]   = data["A"];
                 detail["Customer OMS ID"]   = data["B"];
@@ -153,6 +153,7 @@ class MigrationDataUsecase {
             content = JSON.parse(content)
 
             for(let [key, values] of Object.entries(content)) {
+                console.log("key", key)
                 const items:any = values;
                 const { data }   = items
                 for(let index=0; index < data.length; index++) {
@@ -231,10 +232,11 @@ class MigrationDataUsecase {
             let cacheData:any = {};
             let content  = fs.readFileSync(path.join(__dirname, '../../../data/') + process.env.env + "-" + process.env.companyName + '.json', 'utf8');
             content = JSON.parse(content)
-            
+            let count = 0;
             for(let [key, values] of Object.entries(content)) {
                 const items:any = values;
-                    
+                count++
+                console.log("customerVerificationDocument", key, count)
                 if(items.customer_verified_id !== "" && items.data[0].file_url !== "") {
                     const memoHeaders = {
                         'Authorization': `token ${process.env.api_key}:${process.env.api_secret}`
@@ -297,10 +299,11 @@ class MigrationDataUsecase {
             let cacheData:any = {};
             let content  = fs.readFileSync(path.join(__dirname, '../../../data/') + process.env.env + "-" + process.env.companyName + '.json', 'utf8');
             content = JSON.parse(content)
-            
+            let count = 0;
             for(let [key, values] of Object.entries(content)) {
                 const items:any = values;
-                    
+                count++
+                console.log('customerVerificationStatus', key, count, new Date())
                 if(items.status === "In Review") {
                     const memoHeaders = {
                         'Authorization': `token ${process.env.api_key}:${process.env.api_secret}`
